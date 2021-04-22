@@ -95,13 +95,16 @@ if __name__ == '__main__':
 
         with multiprocessing.Pool(os.cpu_count()) as pool:
             pool.map(yolo2voc, txt_files)
+        pool.join()
 
     if args.voc2yolo:
         xml_files = [name for name in os.listdir(config.xml_dir) if name.endswith('.xml')]
         with multiprocessing.Pool(os.cpu_count()) as pool:
             pool.map(voc2yolo, xml_files)
+        pool.join()
 
     if args.voc2yolo_a:
         xml_files = [name for name in os.listdir(config.xml_dir) if name.endswith('.xml')]
         with multiprocessing.Pool(os.cpu_count()) as pool:
             pool.map(voc2yolo_a, xml_files)
+        pool.close()
