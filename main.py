@@ -25,8 +25,8 @@ def voc2yolo(xml_file):
     in_file = open(f'{config.xml_dir}/{xml_file}')
     tree = ElementTree.parse(in_file)
     size = tree.getroot().find('size')
-    h = int(size.find('height').text)
-    w = int(size.find('width').text)
+    height = int(size.find('height').text)
+    width = int(size.find('width').text)
 
     class_exists = False
     for obj in tree.findall('object'):
@@ -47,13 +47,12 @@ def voc2yolo(xml_file):
             box_y_center = (y_min + y_max) / 2.0
             box_w = x_max - x_min
             box_h = y_max - y_min
-            box_x_r = box_x_center * 1. / w
-            box_w_r = box_w * 1. / w
-            box_y_r = box_y_center * 1. / h
-            box_h_r = box_h * 1. / h
-            # _r means - relative
+            box_x = box_x_center * 1. / width
+            box_w = box_w * 1. / width
+            box_y = box_y_center * 1. / height
+            box_h = box_h * 1. / height
 
-            b = [box_x_r, box_y_r, box_w_r, box_h_r]
+            b = [box_x, box_y, box_w, box_h]
             cls_id = config.names.index(obj.find('name').text)
             out_file.write(str(cls_id) + " " + " ".join([str(f'{i:.6f}') for i in b]) + '\n')
 
@@ -72,10 +71,10 @@ def voc2yolo_a(xml_file):
         out_file = open(f'{config.label_dir}/{xml_file[:-4]}.txt', 'w')
         for obj in tree.findall('object'):
             xml_box = obj.find('bndbox')
-            x_min = int(xml_box.find('xmin').text)
-            y_min = int(xml_box.find('ymin').text)
-            x_max = int(xml_box.find('xmax').text)
-            y_max = int(xml_box.find('ymax').text)
+            x_min = int(float(xml_box.find('xmin').text))
+            y_min = int(float(xml_box.find('ymin').text))
+            x_max = int(float(xml_box.find('xmax').text))
+            y_max = int(float(xml_box.find('ymax').text))
 
             b = [x_min, y_min, x_max, y_max]
             cls_id = config.names.index(obj.find('name').text)
@@ -87,8 +86,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
     parser.add_argument('--yolo2voc', action='store_true', help='YOLO to VOC')
+    parser.add_argument('--voc2yolo', action='store_true', help='VOC to YOLO')
     parser.add_argument('--voc2yolo_a', action='store_true', help='VOC to YOLO absolute')
-    parser.add_argument('--voc2yolo_r', action='store_true', help='VOC to YOLO relative')
     args = parser.parse_args()
 
     if args.yolo2voc:
