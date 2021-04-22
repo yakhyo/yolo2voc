@@ -71,10 +71,10 @@ def voc2yolo_a(xml_file):
         out_file = open(f'{config.label_dir}/{xml_file[:-4]}.txt', 'w')
         for obj in tree.findall('object'):
             xml_box = obj.find('bndbox')
-            x_min = int(float(xml_box.find('xmin').text))
-            y_min = int(float(xml_box.find('ymin').text))
-            x_max = int(float(xml_box.find('xmax').text))
-            y_max = int(float(xml_box.find('ymax').text))
+            x_min = round(float(xml_box.find('xmin').text))
+            y_min = round(float(xml_box.find('ymin').text))
+            x_max = round(float(xml_box.find('xmax').text))
+            y_max = round(float(xml_box.find('ymax').text))
 
             b = [x_min, y_min, x_max, y_max]
             cls_id = config.names.index(obj.find('name').text)
