@@ -1,5 +1,7 @@
 ## Convert YOLO to Pascal VOC format or Pascal to YOLO format
 
+![Downloads](https://img.shields.io/github/downloads/yakhyo/yolo2voc/total) [![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-blue?logo=github)](https://github.com/yakhyo/yolo2voc)
+
 ### Usage:
 
 ```
