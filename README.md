@@ -1,6 +1,8 @@
 ## Convert YOLO to Pascal VOC format or Pascal to YOLO format
 
-![GitHub License](https://img.shields.io/github/license/yakhyo/yolo2voc) [![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-blue?logo=github)](https://github.com/yakhyo/yolo2voc)
+![GitHub License](https://img.shields.io/github/license/yakhyo/yolo2voc) 
+[![GitHub Repo stars](https://img.shields.io/github/stars/yakhyo/face-parsing)](https://github.com/yakhyo/yolo2voc/stargazers)
+![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-blue?logo=github)](https://github.com/yakhyo/yolo2voc)
 
 ### Usage:
 
